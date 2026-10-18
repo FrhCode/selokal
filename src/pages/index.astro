@@ -102,17 +102,17 @@ const faqs = [
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow hero-eyebrow">Katering &amp; jamuan · Jakarta</p>
-        <h1 class="t-h1">Rasa lokal,<br />di meja Anda.</h1>
-        <p class="t-body-lg hero-body">
+        <p class="eyebrow hero-eyebrow hero-anim" style="--hero-delay: 0ms">Katering &amp; jamuan · Jakarta</p>
+        <h1 class="t-h1 hero-anim" style="--hero-delay: 90ms">Rasa lokal,<br />di meja Anda.</h1>
+        <p class="t-body-lg hero-body hero-anim" style="--hero-delay: 210ms">
           Kami membawa masakan Nusantara ke perayaan Anda — bahan musiman,
           bumbu yang diulek segar, dan jamuan yang hangat seperti di rumah.
         </p>
-        <p class="t-body-lg hero-body">
+        <p class="t-body-lg hero-body hero-anim" style="--hero-delay: 320ms">
           Dari jamuan kantor hingga perayaan keluarga, kami mengurus makanannya.
           Anda menikmati momennya.
         </p>
-        <a class="arrow-link hero-link" href="/menu">
+        <a class="arrow-link hero-link hero-anim" style="--hero-delay: 440ms" href="/menu">
           Lihat paket jamuan
           <Arrow />
         </a>
@@ -566,6 +566,50 @@ const faqs = [
     left: 24px;
     color: var(--on-dark);
     text-shadow: 0 1px 12px rgb(0 0 0 / 45%);
+    animation: hero-rise 800ms var(--ease) 700ms both;
+  }
+
+  .hero-anim {
+    animation: hero-rise 800ms var(--ease) both;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  .hero-media :global(img) {
+    animation: hero-image-in 1400ms var(--ease) 120ms both;
+  }
+
+  .hero-seam {
+    transform-origin: top;
+    animation: hero-seam-in 900ms var(--ease) 220ms both;
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+
+  @keyframes hero-image-in {
+    from {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes hero-seam-in {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-anim,
+    .hero-caption,
+    .hero-media :global(img),
+    .hero-seam {
+      animation: none;
+    }
   }
 
   /* Manifesto */
