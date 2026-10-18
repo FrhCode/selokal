@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Placeholder from '../components/Placeholder.astro';
+---
+
+<Base
+  title="Halaman tidak ditemukan — Selokal"
+  description="Halaman yang Anda cari tidak ditemukan."
+>
+  <Placeholder
+    eyebrow="404 · Tidak ditemukan"
+    lines={['Halaman tidak', 'ditemukan.']}
+    body="Alamat yang Anda buka mungkin sudah berpindah atau tidak pernah ada. Mari kembali ke jamuan yang tersedia."
+    primaryLabel="Kembali ke beranda"
+    primaryHref="/"
+    secondaryLabel="Lihat paket jamuan"
+    secondaryHref="/menu"
+  />
+</Base>

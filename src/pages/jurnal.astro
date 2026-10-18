@@ -1,0 +1,377 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import { Image } from 'astro:assets';
+import cuttingImage from '../assets/images/cutting.jpg';
+import bowlsImage from '../assets/images/bowls.jpg';
+---
+
+<Base
+  title="Bumbu yang diulek pagi hari — Jurnal Selokal"
+  description="Kenapa kami menolak bumbu instan — dan apa yang hilang saat ketumbar diblender."
+  active="jurnal"
+>
+  <article class="article">
+    <header class="article-head container">
+      <div class="article-meta">
+        <p class="eyebrow article-cat">Jurnal · Dapur</p>
+        <p class="eyebrow muted">12 Oktober 2026</p>
+      </div>
+      <h1 class="t-h2 article-title">Bumbu yang diulek<br />pagi hari</h1>
+      <p class="t-lead article-dek">
+        Kenapa kami menolak bumbu instan — dan apa yang hilang saat ketumbar
+        diblender.
+      </p>
+      <p class="t-small muted article-byline">
+        Oleh Nadia Prasetyo &nbsp;·&nbsp; 6 menit baca
+      </p>
+    </header>
+
+    <figure class="article-hero">
+      <Image
+        src={cuttingImage}
+        alt="Cabai, tomat, dan bumbu segar di atas talenan kayu"
+        widths={[640, 960, 1280, 1600]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </figure>
+
+    <p class="eyebrow muted article-caption container">
+      Dapur Selokal, Kemang — bumbu diulek setiap pagi sebelum jamuan.
+    </p>
+
+    <div class="reading">
+      <p class="article-lead">
+        Pukul empat pagi adalah jam tersibuk di dapur kami. Bukan karena
+        pesanan, tapi karena bumbu.
+      </p>
+
+      <p>
+        Setiap pagi, tim dapur menumbuk dan mengulek bumbu untuk jamuan hari
+        itu. Tidak ada bumbu dasar yang dibuat seminggu sebelumnya, tidak ada
+        pasta instan yang tinggal disendok.
+      </p>
+
+      <p>Bukan karena kami ingin terlihat tradisional. Ada alasan teknis.</p>
+
+      <h2>Kenapa diulek, bukan diblender</h2>
+
+      <p>
+        Blender memotong bahan dengan pisau berputar cepat. Panas dari gesekan
+        membuat daun jeruk, kemiri, dan cabai kehilangan minyak atsiri — zat
+        yang membawa aroma. Cobek menekan dan menghancurkan, bukan memotong,
+        sehingga minyak itu tetap tinggal di dalam pasta.
+      </p>
+
+      <p>Bedanya kecil di hidung, besar di lidah.</p>
+
+      <span class="red-rule" aria-hidden="true"></span>
+
+      <blockquote class="pull-quote">
+        Bumbu bukan bumbu kalau tidak wangi saat ditumis.
+      </blockquote>
+
+      <h2>Yang tidak bisa dipercepat</h2>
+
+      <p>
+        Mengulek satu kilo bumbu butuh empat puluh menit. Untuk jamuan 200
+        tamu, kami butuh enam orang di dapur sejak subuh. Itu sebabnya kami
+        membatasi jumlah pesanan setiap hari — bukan strategi pemasaran, tapi
+        konsekuensi dari cara kami memasak.
+      </p>
+
+      <p>
+        Bahan datang dari pasar pagi itu juga — cabai merah keriting, kemiri,
+        lengkuas, dan daun jeruk, semuanya masih basah saat tiba di dapur.
+      </p>
+
+      <figure class="inline-figure">
+        <Image
+          src={bowlsImage}
+          alt="Bumbu dan lauk yang baru disiapkan, siap diulek"
+          widths={[400, 680, 1024]}
+          sizes="(max-width: 720px) 100vw, 680px"
+          loading="lazy"
+        />
+        <figcaption class="eyebrow muted">
+          Bumbu yang baru dibeli, siap diulek.
+        </figcaption>
+      </figure>
+
+      <p>
+        Tidak semua bagian jamuan dikerjakan pagi itu. Rendang mulai dimasak
+        dua hari sebelum acara — bukan karena bumbunya instan, tapi karena
+        daging butuh waktu untuk menyerap semuanya. Yang kami jaga bukan
+        kecepatan, melainkan urutan.
+      </p>
+
+      <p>
+        Kalau Anda pernah merasa masakan katering rasanya datar, kemungkinan
+        besar bumbunya dibuat jauh sebelum hari acara. Rasa seperti itu tidak
+        bisa ditambal dengan garam.
+      </p>
+    </div>
+
+    <section class="related container">
+      <h2 class="t-h6 related-title">Baca juga</h2>
+      <div class="related-grid">
+        <a class="related-card" href="/under-development" data-reveal>
+          <p class="eyebrow related-cat">Dari pasar ke dapur</p>
+          <p class="related-card-title t-h6">
+            Empat jam dari pasar ke meja jamuan
+          </p>
+          <p class="t-caption muted">6 menit baca</p>
+        </a>
+        <a
+          class="related-card"
+          href="/under-development"
+          data-reveal
+          style="--reveal-delay: 80ms"
+        >
+          <p class="eyebrow related-cat">Operasional</p>
+          <p class="related-card-title t-h6">Menakar jamuan untuk 200 tamu</p>
+          <p class="t-caption muted">8 menit baca</p>
+        </a>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .article {
+    background: var(--white);
+  }
+
+  .article-head {
+    padding-block: 56px 64px;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .article-cat {
+    color: var(--red);
+  }
+
+  .article-title {
+    max-width: 1100px;
+    margin-top: 48px;
+  }
+
+  .article-dek {
+    max-width: 760px;
+    margin-top: 24px;
+    color: var(--muted);
+  }
+
+  .article-byline {
+    margin-top: 52px;
+  }
+
+  .article-hero {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    aspect-ratio: 12 / 5;
+    overflow: hidden;
+  }
+
+  .article-hero :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-caption {
+    padding-top: 28px;
+  }
+
+  .reading {
+    max-width: 680px;
+    margin: 36px auto 0;
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  .reading p {
+    margin: 0;
+  }
+
+  .reading p + p {
+    margin-top: 24px;
+  }
+
+  .article-lead {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .reading h2 {
+    margin-top: 56px;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.28;
+    letter-spacing: -0.014em;
+  }
+
+  .red-rule {
+    display: block;
+    width: 80px;
+    height: 3px;
+    margin: 48px 0 28px;
+    background: var(--red);
+  }
+
+  .pull-quote {
+    max-width: 600px;
+    margin: 0 0 40px;
+    font-size: 36px;
+    line-height: 1.3;
+    letter-spacing: -0.017em;
+    color: var(--red);
+  }
+
+  .inline-figure {
+    margin: 44px 0;
+  }
+
+  .inline-figure :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .inline-figure figcaption {
+    margin-top: 16px;
+  }
+
+  .related {
+    border-top: 1px solid var(--hairline);
+    margin-top: 72px;
+    padding-block: 48px 64px;
+  }
+
+  .related-title {
+    margin-bottom: 48px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 64px;
+  }
+
+  .related-card {
+    display: block;
+  }
+
+  .related-cat {
+    color: var(--red);
+  }
+
+  .related-card-title {
+    max-width: 600px;
+    margin-top: 16px;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .related-card:hover .related-card-title {
+    color: var(--red);
+  }
+
+  .related-card .t-caption {
+    margin-top: 12px;
+  }
+
+  @media (max-width: 1024px) {
+    .article-head {
+      padding-block: 48px 48px;
+    }
+
+    .article-title {
+      margin-top: 36px;
+    }
+
+    .reading {
+      padding-inline: var(--margin);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .article-title br {
+      display: none;
+    }
+
+    .article-head {
+      padding-block: 40px 40px;
+    }
+
+    .article-dek {
+      margin-top: 20px;
+    }
+
+    .article-byline {
+      margin-top: 36px;
+    }
+
+    .article-hero {
+      aspect-ratio: 4 / 3;
+    }
+
+    .article-caption {
+      padding-top: 20px;
+    }
+
+    .reading {
+      margin-top: 28px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .article-lead {
+      font-size: 18px;
+    }
+
+    .reading h2 {
+      margin-top: 40px;
+      font-size: 24px;
+    }
+
+    .red-rule {
+      margin: 36px 0 24px;
+    }
+
+    .pull-quote {
+      font-size: 28px;
+    }
+
+    .inline-figure {
+      margin: 32px 0;
+    }
+
+    .related {
+      margin-top: 56px;
+      padding-block: 40px 48px;
+    }
+
+    .related-title {
+      margin-bottom: 32px;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+</style>

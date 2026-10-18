@@ -1,0 +1,597 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import { Image } from 'astro:assets';
+import bowlsImage from '../assets/images/bowls.jpg';
+import rendangImage from '../assets/images/rendang.jpg';
+import spreadImage from '../assets/images/spread.jpg';
+
+const packages = [
+  {
+    id: 'rempah',
+    name: 'Rempah',
+    price: 'Rp 185.000',
+    min: 'Min. 10 tamu',
+    description:
+      'Untuk jamuan kantor dan makan siang tim. Rasa rumahan, penyajian rapi, tanpa upacara.',
+    image: bowlsImage,
+    alt: 'Aneka lauk Nusantara dalam mangkuk kecil',
+    columns: [
+      [
+        { label: 'Pembuka', items: ['Sup ayam kampung', 'Perkedel kentang'] },
+        {
+          label: 'Utama',
+          items: ['Nasi liwet', 'Ayam kampung ungkep', 'Ikan kembung goreng'],
+        },
+      ],
+      [
+        {
+          label: 'Pendamping',
+          items: ['Sambal bajak', 'Lalapan segar', 'Kerupuk udang'],
+        },
+        { label: 'Penutup', items: ['Pisang goreng', 'Teh manis hangat'] },
+      ],
+    ],
+  },
+  {
+    id: 'nusantara',
+    name: 'Nusantara',
+    price: 'Rp 245.000',
+    min: 'Min. 20 tamu',
+    description:
+      'Paket yang paling sering dipesan. Hidangan Jawa, Sumatra, dan Sulawesi dalam satu meja.',
+    image: rendangImage,
+    alt: 'Rendang daging dalam daun pisang',
+    columns: [
+      [
+        { label: 'Pembuka', items: ['Lumpia semarang', 'Sup buntut'] },
+        {
+          label: 'Utama',
+          items: ['Nasi kuning', 'Rendang daging', 'Sate ayam', 'Gado-gado'],
+        },
+      ],
+      [
+        { label: 'Pendamping', items: ['Sambal ijo', 'Acar kuning', 'Kerupuk'] },
+        { label: 'Penutup', items: ['Kue tradisional', 'Es kelapa muda'] },
+      ],
+    ],
+  },
+  {
+    id: 'santap-besar',
+    name: 'Santap Besar',
+    price: 'Rp 320.000',
+    min: 'Min. 50 tamu',
+    description:
+      'Untuk perayaan besar. Prasmanan panjang dengan stasiun hidup dan tim yang menjaga meja tetap penuh.',
+    image: spreadImage,
+    alt: 'Prasmanan dengan aneka lauk di atas meja panjang',
+    columns: [
+      [
+        {
+          label: 'Prasmanan',
+          items: [
+            'Rendang daging',
+            'Ayam bakar kecap',
+            'Ikan asam pedas',
+            'Sate ayam',
+            'Gado-gado',
+            'Sayur lodeh',
+          ],
+        },
+      ],
+      [
+        {
+          label: 'Stasiun',
+          items: ['Stasiun sate', 'Stasiun gado-gado', 'Es kelapa muda'],
+        },
+        { label: 'Penutup', items: ['Kudapan manis', 'Kopi tubruk'] },
+      ],
+    ],
+  },
+];
+
+const addOns = [
+  {
+    name: 'Stasiun sate',
+    price: 'Rp 25.000 / tamu',
+    description: 'Sate ayam dibakar di tempat, sepuluh tusuk per tamu.',
+  },
+  {
+    name: 'Es kelapa muda',
+    price: 'Rp 15.000 / tamu',
+    description: 'Kelapa utuh, disajikan di meja minuman.',
+  },
+  {
+    name: 'Bar kopi & teh',
+    price: 'Rp 12.000 / tamu',
+    description: 'Kopi tubruk, teh melati, dan gula batu.',
+  },
+  {
+    name: 'Kudapan manis',
+    price: 'Rp 18.000 / tamu',
+    description: 'Tiga kue basah dan satu kue kering, per tamu.',
+  },
+  {
+    name: 'Peralatan saji tambahan',
+    price: 'Rp 500.000 / acara',
+    description: 'Piring, gelas, dan sendok untuk 50 tamu tambahan.',
+  },
+];
+---
+
+<Base
+  title="Menu — Selokal"
+  description="Tiga paket jamuan Selokal: Rempah, Nusantara, dan Santap Besar. Harga per tamu, sudah termasuk tim dan peralatan saji."
+  active="menu"
+>
+  <section class="intro">
+    <div class="container intro-grid" data-reveal>
+      <div>
+        <h1 class="t-display">Menu</h1>
+        <p class="eyebrow muted intro-note">Harga per tamu · diperbarui Oktober 2026</p>
+      </div>
+
+      <div class="intro-copy">
+        <p class="t-body-lg">
+          Tiga paket jamuan, masing-masing disusun dari bahan yang sedang musim.
+          Semua harga sudah termasuk tim, peralatan saji, dan koordinasi
+          sebelum hari acara.
+        </p>
+        <p class="t-body-lg muted intro-copy-second">
+          Menu bisa disesuaikan dengan pantangan diet atau alergi tamu — beri
+          tahu kami saat konsultasi.
+        </p>
+        <a class="arrow-link intro-link" href="/#tanya">
+          Rancang menu sendiri
+          <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="index">
+    <div class="container">
+      <ul class="index-list" data-reveal>
+        {
+          packages.map((pack) => (
+            <li>
+              <a href={`#${pack.id}`}>
+                <span class="index-name t-h6">{pack.name}</span>
+                <span class="t-caption muted">
+                  {pack.price} · {pack.min.toLowerCase()}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {
+    packages.map((pack) => (
+      <article class="package" id={pack.id}>
+        <div class="container package-grid" data-reveal>
+          <div class="package-info">
+            <h2 class="package-name">{pack.name}</h2>
+            <p class="package-price">{pack.price}</p>
+            <p class="package-min t-small muted">{pack.min}</p>
+            <p class="package-desc t-body">{pack.description}</p>
+
+            <p class="eyebrow muted package-inc-label">Termasuk</p>
+            <p class="package-inc t-small muted">
+              Tim &amp; pelayan, peralatan saji, koordinasi acara, dan
+              pembersihan setelah jamuan.
+            </p>
+
+            <a class="arrow-link package-link" href="/#tanya">
+              Pilih paket ini
+              <Arrow />
+            </a>
+          </div>
+
+          <div class="package-detail">
+            <div class="package-media">
+              <Image
+                src={pack.image}
+                alt={pack.alt}
+                widths={[480, 816, 1200, 1632]}
+                sizes="(max-width: 900px) 100vw, 816px"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="dishes">
+              {pack.columns.map((column) => (
+                <div class="dish-column">
+                  {column.map((group) => (
+                    <div class="dish-group">
+                      <p class="eyebrow muted">{group.label}</p>
+                      <ul>
+                        {group.items.map((item) => (
+                          <li class="t-body">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+
+  <section class="addons">
+    <div class="container">
+      <div class="addons-head" data-reveal>
+        <h2 class="t-h4">Tambahan</h2>
+        <p class="t-body muted addons-note">
+          Bisa ditambahkan ke paket mana pun. Harga per tamu kecuali disebut
+          lain.
+        </p>
+      </div>
+
+      <ul class="addon-list" data-reveal>
+        {
+          addOns.map((addon) => (
+            <li class="addon-row">
+              <span class="addon-name t-h5">{addon.name}</span>
+              <span class="addon-price">{addon.price}</span>
+              <span class="addon-desc t-small muted">{addon.description}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="menu-cta">
+    <div class="container" data-reveal>
+      <h2 class="t-h3 menu-cta-title">Belum yakin pilih yang mana?</h2>
+      <p class="t-body-lg menu-cta-body">
+        Ceritakan jumlah tamu dan suasana acara. Kami bantu memilih paket dan
+        menyusun menunya.
+      </p>
+      <div class="menu-cta-actions">
+        <a class="btn" href="/#tanya">Rancang jamuan</a>
+        <a class="arrow-link" href="https://wa.me/6281234567890">
+          Tanya via WhatsApp
+          <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Intro */
+  .intro {
+    padding-block: 58px 72px;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 584px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .intro-note {
+    margin-top: 24px;
+    color: var(--muted);
+  }
+
+  .intro-copy {
+    padding-top: 12px;
+  }
+
+  .intro-copy-second {
+    margin-top: 32px;
+  }
+
+  .intro-link {
+    margin-top: 48px;
+  }
+
+  /* Package index */
+  .index {
+    border-block: 1px solid var(--hairline);
+  }
+
+  .index-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-block: 20px;
+  }
+
+  .index-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .index-name {
+    transition: color var(--dur) var(--ease);
+  }
+
+  .index-list a:hover .index-name {
+    color: var(--red);
+  }
+
+  /* Package blocks */
+  .package {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .package-grid {
+    display: grid;
+    grid-template-columns: 460px minmax(0, 1fr);
+    gap: 36px;
+    padding-block: 52px 56px;
+  }
+
+  .package-name {
+    font-size: clamp(38px, 3.89vw, 56px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .package-price {
+    margin-top: 24px;
+    font-size: clamp(24px, 2.22vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.019em;
+    color: var(--red);
+  }
+
+  .package-min {
+    margin-top: 8px;
+  }
+
+  .package-desc {
+    max-width: 400px;
+    margin-top: 24px;
+  }
+
+  .package-inc-label {
+    margin-top: 64px;
+  }
+
+  .package-inc {
+    max-width: 400px;
+    margin-top: 8px;
+  }
+
+  .package-link {
+    margin-top: 56px;
+  }
+
+  .package-media {
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+  }
+
+  .package-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dishes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px;
+    margin-top: 24px;
+  }
+
+  .dish-column {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  .dish-group ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 12px;
+  }
+
+  /* Add-ons */
+  .addons {
+    background: var(--sand);
+    padding-block: 56px;
+  }
+
+  .addons-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 476px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .addons-note {
+    padding-top: 6px;
+  }
+
+  .addon-list {
+    border-bottom: 1px solid var(--hairline);
+    margin-top: 52px;
+  }
+
+  .addon-row {
+    display: grid;
+    grid-template-columns: 356px 300px minmax(0, 1fr);
+    align-items: center;
+    min-height: 66px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .addon-price {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .addon-desc {
+    padding-left: 24px;
+  }
+
+  /* CTA */
+  .menu-cta {
+    background: var(--ink);
+    color: var(--cream);
+    padding-block: 66px;
+  }
+
+  .menu-cta-title {
+    max-width: 760px;
+  }
+
+  .menu-cta-body {
+    max-width: 640px;
+    margin-top: 48px;
+    color: var(--on-dark);
+  }
+
+  .menu-cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .menu-cta-actions .arrow-link {
+    color: var(--cream);
+  }
+
+  @media (max-width: 1100px) {
+    .intro-grid {
+      grid-template-columns: minmax(0, 1fr) 420px;
+    }
+
+    .package-grid {
+      grid-template-columns: 360px minmax(0, 1fr);
+    }
+
+    .addons-head {
+      grid-template-columns: minmax(0, 1fr) 380px;
+    }
+
+    .addon-row {
+      grid-template-columns: 280px 240px minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .intro {
+      padding-block: 48px 56px;
+    }
+
+    .intro-link {
+      margin-top: 32px;
+    }
+
+    .index-list {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-block: 24px;
+    }
+
+    .package-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-block: 40px 48px;
+    }
+
+    .package-desc,
+    .package-inc {
+      max-width: 560px;
+    }
+
+    .package-inc-label {
+      margin-top: 40px;
+    }
+
+    .package-link {
+      margin-top: 32px;
+    }
+
+    .dishes {
+      gap: 40px;
+    }
+
+    .addons-head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .addons-note {
+      padding-top: 0;
+    }
+
+    .addon-list {
+      margin-top: 32px;
+    }
+
+    .addon-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 24px;
+      padding-block: 18px;
+      min-height: 0;
+    }
+
+    .addon-name {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .addon-price {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: right;
+    }
+
+    .addon-desc {
+      grid-column: 1 / -1;
+      padding-left: 0;
+    }
+
+    .menu-cta {
+      padding-block: 56px;
+    }
+
+    .menu-cta-body {
+      margin-top: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .package-name {
+      font-size: 36px;
+    }
+
+    .dishes {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .dish-column {
+      gap: 32px;
+    }
+
+    .menu-cta-actions {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  }
+</style>

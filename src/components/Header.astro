@@ -1,0 +1,242 @@
+---
+interface Props {
+  active?: 'menu' | 'jurnal';
+}
+
+const { active } = Astro.props;
+
+const links = [
+  { label: 'MENU', href: '/menu', key: 'menu' },
+  { label: 'LAYANAN', href: '/under-development', key: '' },
+  { label: 'CERITA', href: '/under-development', key: '' },
+  { label: 'JURNAL', href: '/jurnal', key: 'jurnal' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="wordmark" href="/" aria-label="Selokal — beranda">SELOKAL</a>
+
+    <nav class="nav" aria-label="Navigasi utama">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={active === link.key ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a class="btn header-cta" href="/#tanya">Rancang jamuan</a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      data-nav-toggle
+    >
+      Menu
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav class="container mobile-nav-inner" aria-label="Navigasi seluler">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={active === link.key ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a class="btn" href="/#tanya">Rancang jamuan</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  if (!(window as any).__selokalNav) {
+    (window as any).__selokalNav = true;
+
+    const close = (button: HTMLElement, panel: HTMLElement | null) => {
+      button.setAttribute('aria-expanded', 'false');
+      if (panel) panel.hidden = true;
+    };
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const toggle = target.closest<HTMLElement>('[data-nav-toggle]');
+
+      if (toggle) {
+        const panel = document.getElementById(
+          toggle.getAttribute('aria-controls') || ''
+        );
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        if (panel) panel.hidden = open;
+        return;
+      }
+
+      const link = target.closest<HTMLElement>('#mobile-nav a');
+      if (link) {
+        const button = document.querySelector<HTMLElement>('[data-nav-toggle]');
+        if (button) close(button, document.getElementById('mobile-nav'));
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      const button = document.querySelector<HTMLElement>('[data-nav-toggle]');
+      if (button && button.getAttribute('aria-expanded') === 'true') {
+        close(button, document.getElementById('mobile-nav'));
+        button.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 20;
+    background: var(--white);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    min-height: 112px;
+  }
+
+  .wordmark {
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 1.5;
+    letter-spacing: 0.37em;
+    color: var(--red);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .wordmark:hover {
+    color: var(--red-hover);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+  }
+
+  .nav a {
+    position: relative;
+    padding-block: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.145em;
+    text-transform: uppercase;
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .nav a[aria-current='page'] {
+    color: var(--red);
+  }
+
+  .header-cta {
+    margin-left: 32px;
+    border-radius: 24px;
+  }
+
+  .nav-toggle {
+    display: none;
+    margin-left: auto;
+    padding: 10px 0;
+    border: 0;
+    background: none;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.145em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .nav-toggle::after {
+    content: ' +';
+    color: var(--red);
+  }
+
+  .nav-toggle[aria-expanded='true']::after {
+    content: ' −';
+  }
+
+  .mobile-nav {
+    border-top: 1px solid var(--hairline);
+    background: var(--white);
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-block: 28px 32px;
+  }
+
+  .mobile-nav-inner a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.145em;
+    text-transform: uppercase;
+  }
+
+  .mobile-nav-inner a[aria-current='page'] {
+    color: var(--red);
+  }
+
+  .mobile-nav-inner .btn {
+    margin-top: 8px;
+    letter-spacing: 0.013em;
+    text-transform: none;
+  }
+
+  @media (max-width: 900px) {
+    .header-row {
+      min-height: 84px;
+    }
+
+    .nav,
+    .header-cta {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: block;
+    }
+
+    .wordmark {
+      font-size: 24px;
+    }
+  }
+</style>
