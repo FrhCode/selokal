@@ -1,0 +1,9 @@
+node_modules
+dist
+.astro
+.git
+.analysis
+.design-assets
+Dockerfile
+docker-compose.yml
+*.log

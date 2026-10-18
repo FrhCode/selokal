@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: selokal:latest
+    container_name: selokal
+    restart: unless-stopped
+    ports:
+      - "8080:80"
